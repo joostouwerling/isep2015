@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>User Management</h1>  
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8">
+        <form class="form-inline" ng-show="users">
+            <div class="form-group">
+                <label for="searchFilter" class="hidden-xs">Search: </label>
+                <input type="text" class="form-control" id="searchFilter" ng-model="search" placeholder="Search...">
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-4">
+        <a class="btn btn-primary pull-right" href="#/users/new">+ Create new</a>
+    </div>
+</div>
+<div class="loader" ng-show="isLoading"></div>
+<div class="row" ng-show="!isLoading">
+    <div class="col-md-12 table-responsive">
+        <table class="table table-hover" ng-show="users">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>    
+            <tbody>
+                <tr ng-repeat="user in users | filter:search | orderBy:'id'">
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.role}}</td>
+                    <td>{{user.disabled ? "Disabled" : "Enabled"}}</td>
+                    <td>
+                        <a href="#/users/{{user.id}}">Edit</a> - <a href="" ng-click="delete($index)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

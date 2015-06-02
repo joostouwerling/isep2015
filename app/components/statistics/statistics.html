@@ -1,0 +1,62 @@
+<script>
+(function(w,d,s,g,js,fjs){
+  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(cb){this.q.push(cb)}};
+  js=d.createElement(s);fjs=d.getElementsByTagName(s)[0];
+  js.src='https://apis.google.com/js/platform.js';
+  fjs.parentNode.insertBefore(js,fjs);js.onload=function(){g.load('analytics')};
+}(window,document,'script'));
+</script>
+<script>
+  gapi.analytics.ready(function(){function t(t){if(n.test(t))return t;var i=a.exec(t);if(i)return e(+i[1]);if("today"==t)return e(0);if("yesterday"==t)return e(1);throw new Error("Cannot convert date "+t)}function e(t){var e=new Date;e.setDate(e.getDate()-t);var a=String(e.getMonth()+1);a=1==a.length?"0"+a:a;var n=String(e.getDate());return n=1==n.length?"0"+n:n,e.getFullYear()+"-"+a+"-"+n}var a=/(\d+)daysAgo/,n=/\d{4}\-\d{2}\-\d{2}/;gapi.analytics.createComponent("DateRangeSelector",{execute:function(){var e=this.get();e["start-date"]=e["start-date"]||"7daysAgo",e["end-date"]=e["end-date"]||"yesterday",this.container="string"==typeof e.container?document.getElementById(e.container):e.container,e.template&&(this.template=e.template),this.container.innerHTML=this.template;var a=this.container.querySelectorAll("input");return this.startDateInput=a[0],this.startDateInput.value=t(e["start-date"]),this.endDateInput=a[1],this.endDateInput.value=t(e["end-date"]),this.setValues(),this.setMinMax(),this.container.onchange=this.onChange.bind(this),this},onChange:function(){this.setValues(),this.setMinMax(),this.emit("change",{"start-date":this["start-date"],"end-date":this["end-date"]})},setValues:function(){this["start-date"]=this.startDateInput.value,this["end-date"]=this.endDateInput.value},setMinMax:function(){this.startDateInput.max=this.endDateInput.value,this.endDateInput.min=this.startDateInput.value},template:'<div class="DateRangeSelector">  <div class="DateRangeSelector-item">    <label>Start Date</label>     <input type="date">  </div>  <div class="DateRangeSelector-item">    <label>End Date</label>     <input type="date">  </div></div>'})});
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Statistics</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 statsSettings">
+        <h2>Settings</h2>
+        <h3>Date range</h3>
+        <form name="dateForm">
+            <label>
+                Start <input type="date" ng-model="filters.dateRange.start">
+            </label>
+            <label>
+                End <input type="date" ng-model="filters.dateRange.end">
+            </label>
+        </form>
+        <h3>Dimensions</h3>
+        <form name="dimensionForm">
+            <label><input type="checkbox" ng-model="filters.dimensions.date"> Date</label>
+            <label><input type="checkbox" ng-model="filters.dimensions.username"> Username</label>
+            <label><input type="checkbox" ng-model="filters.dimensions.action"> Action</label>
+        </form>
+        <h3>View type</h3>
+        <form name="metricsForm">
+            <label ng-repeat="chartType in allowableCharts">
+                <input type="radio" ng-model="filters.chartType" ng-value="chartType"> {{chartType | capitalize}}
+            </label>
+        </form>
+        <h3>Filters</h3>
+        <form name="metricsForm" id="metricsForm">
+            <div class="form-group">
+                <label for="filterUsername">Username:</label>
+                <input type="text" name="filterUsername" id="filterUsername" ng-model="filters.username">
+            </div>
+            <div class="form-group">
+                <label for="filterAction">Action</label>
+                <select ng-model="filters.action" ng-options="action.text for action in allowableActions">
+                    <option value="">All action</option>
+                </select>
+            </div>
+        </form>
+        For extended analysis, see the <a href="http://google.com/analytics/" target="_blank">Google Analytics dashboard</a>.
+    </div>
+    <div class="col-md-9">
+        <h2>View</h2>
+        <div id="statsContainer" style="width: 90%;"></div>
+        <div class="alert alert-danger" role="alert" id="errorMessage" ng-show="!analyticsAvailable">Error: Google Analytics Embed API is not loaded.</div>
+    </div>
+</div>

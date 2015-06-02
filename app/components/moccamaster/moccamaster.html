@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Moccamaster Management</h1>
+    </div>
+</div>
+
+<div class="loader" ng-show="isLoading"></div>
+<show-error></show-error>
+
+<div class="row moccamaster" ng-show="!isLoading">
+
+    <div class="col-md-4 text-center">
+        <h2>State</h2>
+        <div ng-show="moccamaster.state == 'Off' && moccamaster.supplies">
+            <span class="glyphicon glyphicon-ok" style="color: green; font-size: 700%"></span>
+            <p>
+                The Moccamaster is fully supplied. <br />
+                Ready for take off!
+            </p>
+        </div>
+        <div ng-show="moccamaster.state == 'Off' && !moccamaster.supplies">
+            <span class="glyphicon glyphicon-exclamation-sign" style="color: red; font-size: 700%"></span>
+            <p>
+                There are no supplies. <br />
+                You probably shouldn't start brewing.
+            </p>
+        </div>
+        <div ng-show="moccamaster.state == 'On'">
+            <span class="glyphicon glyphicon-fire" style="color: orange; font-size: 700%"></span>
+            <p>
+                The Moccamaster is currently brewing!
+            </p>
+            <div class="progress" style="height: 50px; width: 75%; margin: 0 auto;">
+                <div class="progress-bar progress-bar-success" 
+                  role="progressbar" aria-valuenow="{{percentage}}" aria-valuemin="0" 
+                  aria-valuemax="100" ng-style="{width : ( percentage + '%' ) }"  style="line-height: 50px; min-width: 4em;">
+                    <span>{{percentage}}%</span>
+                </div>
+            </div>
+            <span id="percentage">Time left <strong>{{moccamaster.timeleft}}</strong>s</span>
+        </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <h2>Supplies</h2>
+        <div ng-show="moccamaster.supplies">
+            <span class="glyphicon glyphicon-thumbs-up" style="font-size: 700%"></span>
+            <p>
+                The Moccamaster is fully supplied.
+            </p>
+        </div>
+        <div ng-show="!moccamaster.supplies">
+            <span class="glyphicon glyphicon-thumbs-down" style="font-size: 700%"></span>
+            <p>
+                The Moccamaster is not supplied.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <h2 class="text-center">Actions</h2>
+        <button class="btn btn-lg btn-success" ng-show="moccamaster.state == 'Off'" ng-click="turnMoccamasterOn()">Start brewing</button>
+        <button class="btn btn-lg btn-danger" ng-show="moccamaster.state == 'On'" ng-click="turnMoccamasterOff()">Stop brewing</button>
+        <button class="btn btn-lg btn-warning" ng-click="changeSupplyFlag()">Change supply flag</button>
+    </div>
+</div>

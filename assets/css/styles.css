@@ -1,0 +1,149 @@
+html {
+  background: #e5e5e5;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+    background: none;
+    background-size: cover;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.statsSettings {
+    border-right: 1px solid #b5b5b5;
+}
+
+.statsSettings ul {
+    padding-left: 20px;
+}
+
+.statsSettings ul button {
+    padding: 2px;
+}
+
+.statsSettings ul button.active {
+    padding: 2px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size:18px;
+        font-weight: bold;
+    }
+}
+
+.statsSettings input[type="date"] {
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.statsSettings label {
+    display: block;
+    font-weight: normal;
+}
+
+#metricsForm {
+    margin-bottom: 20px;
+}
+ 
+/*
+ General inside markup
+******************/
+
+.inside {
+    margin: 50px auto;
+}
+
+.navbar {
+    border-radius: 0px;
+    background: #fff;
+    border: 0;
+    border-bottom: 5px solid #428bca;
+    margin-bottom: 0;
+}
+
+.navbar-nav .active {
+    background-color: #428bca !important;
+    color: #fff !important;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    background-color: #fff !important;
+}
+
+.content {
+    background: #fff;
+    padding-bottom: 20px;
+}
+
+.loader {
+    background-image: url('../img/loading.gif');
+    background-repeat: no-repeat;
+    background-position: center top; 
+    width: 100%;
+    min-height: 128px;
+}
+
+.moccamaster button {
+    display: block;
+    margin: 10px auto;
+}
+.moccamaster h2 {
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#logoImg img {
+    margin-right: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .inside {
+        margin: 15px auto;
+    }
+    #logoImg {
+        padding-top: 3px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    html {
+        background: url(../img/coffee-background.jpg) no-repeat center center fixed;
+        background-size: cover;
+    }
+    .userImage {
+        padding: 0 !important;
+    }
+    .userImage img {
+        height: 74px;
+    }
+    
+    .navbar-nav > li > a {
+        padding: 27px 27px;
+    }
+    
+    .navbar.container {
+        padding-right: 0px;
+    }
+}
+
+

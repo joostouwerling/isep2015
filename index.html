@@ -1,0 +1,150 @@
+<!--- Author: Joost Ouwerling <j.t.ouwerling@student.rug.nl>--->
+<!DOCTYPE html>
+<html lang="en" ng-app="CoffeeApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="Automatic Moccamaster control">
+        <meta name="author" content="Softwerk AB">
+
+        <title>Awesome Coffee Machine System</title>
+    
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        
+          ga('create', 'UA-62565709-1', 'auto');
+        
+        </script>
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-mocks.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js"></script>
+        
+        <!-- Shared -->
+        <script src="app/shared/angular-local-storage.min.js"></script>
+        <script src="app/shared/capitalize.js"></script>
+        <script src="app/shared/config.js"></script>
+        <script src="app/shared/MenuController.js"></script>
+        <!-- Shared components / auth -->
+        <script src="app/shared/auth/AuthPersistence.js"></script>
+        <script src="app/shared/auth/AuthService.js"></script>
+        <script src="app/shared/auth/ForgotPasswordService.js"></script>
+        <!-- Shared components / statistics -->
+        <script src="app/shared/statistics/AnalyticsAdapter.js"></script>
+        <script src="app/shared/statistics/StatisticsLogger.js"></script>
+        <!-- Shared components / users -->
+        <script src="app/shared/users/UserService.js"></script>
+        
+        <!-- components / auth -->
+        <script src="app/components/auth/auth.js"></script>
+        <script src="app/components/auth/forbidden/ForbiddenController.js"></script>
+        <script src="app/components/auth/login/LoginController.js"></script>
+        <script src="app/components/auth/logout/LogoutController.js"></script>
+        <script src="app/components/auth/forgotPassword/forgotPassword.js"></script>
+        <script src="app/components/auth/forgotPassword/ForgotPasswordController.js"></script>
+        <script src="app/components/auth/forgotPassword/SetNewPasswordController.js"></script>
+        <!-- components / moccamaster -->
+        <script src="app/components/moccamaster/moccamaster.js"></script>
+        <script src="app/components/moccamaster/MoccamasterController.js"></script>
+        <script src="app/components/moccamaster/MoccamasterService.js"></script>
+        <!-- components / statistics -->
+        <script src="app/components/statistics/statistics.js"></script>
+        <script src="app/components/statistics/StatisticsController.js"></script>
+        <script src="app/components/statistics/StatisticsView.js"></script>
+        <script src="app/components/statistics/AnalyticsAccessTokenAdapter.js"></script>
+        <!-- components / users -->
+        <script src="app/components/users/users.js"></script>
+        <script src="app/components/users/create/CreateUserController.js"></script>
+        <script src="app/components/users/edit/EditUserController.js"></script>
+        <script src="app/components/users/list/ListUsersController.js"></script>
+        
+        <!-- development mockup api -->
+        <script src="app/dev/dev.js"></script>
+        <script src="app/dev/mock/AuthMock.js"></script>
+        <script src="app/dev/mock/MoccamasterMock.js"></script>
+        <script src="app/dev/mock/MockService.js"></script>
+        <script src="app/dev/mock/StatisticsMock.js"></script>
+        <script src="app/dev/mock/UsersMock.js"></script>
+        
+        <!-- Main App -->
+        <script src="app/coffee.js"></script>
+    
+        <!-- Custom styles for this template -->
+        <link href="./assets/css/styles.css" rel="stylesheet">
+        
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        
+        <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">-->
+
+        
+        <div class="inside">
+    
+            <nav class="navbar navbar-default container" ng-controller="MenuController">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/moccamaster" id="logoImg">
+                        <img alt="Brand" height="45" src="./assets/img/cmslogo.png">
+                    </a>
+                </div>
+                
+                <div class="navbar-collapse" ng-class="{collapse: isCollapsed}" id="navbar-coffee">
+                    <ul class="nav navbar-nav" ng-click="isCollapsed = true">
+                        <li><a href="#/login" ng-class="{ active: isActive('/login') }" ng-show="!authenticated">Login</a></li>
+                        <li><a href="#/forgotpassword" ng-class="{ active: isActive('/forgotpassword') }" ng-show="!authenticated">Forgot Password</a></li>
+                        <li><a href="#/moccamaster" ng-class="{ active: isActive('/moccamaster') }" ng-show="authenticated">Moccamaster</a></li>
+                        <li><a href="#/statistics" ng-class="{ active: isActive('/statistics') }" ng-show="authenticated">Statistics</a></li>
+                        <li><a href="#/users" ng-class="{ active: isActive('/users') }" ng-show="authenticated && isAdmin">User Administration</a></li>
+                        <li class="visible-xs" ng-show="authenticated"><a href="#/logout">Logout</a></li>
+                        <li class="dropdown hidden-xs" ng-show="authenticated">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span> My profile <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ng-href="{{'#/users/' + userId}}">Change details</a></li>
+                                <li><a href="#/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div> <!-- /. navbar-collapse -->
+                    
+            </nav>
+            
+              
+            <div class="container content" ng-view>
+                
+            </div>
+    
+           
+
+        </div> <!-- /container inside -->
+        
+    </body>
+</html>
