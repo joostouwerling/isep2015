@@ -51,3 +51,7 @@ Considerations
 --------------
 When running this application in production, it might be useful to minimize and 
 put all JS files in one file, to improve load speed.
+
+Optimizations
+-------------
+Various. Unit tests, alert service, api service, other angularities which I do not (yet) know about ;-)
